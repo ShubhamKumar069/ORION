@@ -9,6 +9,14 @@ float studentMarks[MAX_STUDENTS];
 int studentRollNo[MAX_STUDENTS];
 int totalStudents = 0;
 
+bool checkStudents() {
+    if (totalStudents == 0) {
+        std::cout << "No Students Found.\n";
+        return false;
+    }
+    return true;
+}
+
 void addStudent() {
         if(totalStudents >= MAX_STUDENTS) {
             std::cout << "Students Full! Try Again Next Year.\n";
@@ -48,10 +56,7 @@ void addStudent() {
 
 void viewStudents() {
 
-    if(totalStudents == 0) {
-        std::cout << "No Students Found.\n";
-        return;
-    }
+    if (!checkStudents()) return;
 
     for (int i = 0; i<totalStudents; i++) {
         std::cout << "Student Name: " << studentNames[i] << std::endl;
@@ -68,10 +73,7 @@ void viewStudents() {
 
 void searchStudent() {
 
-    if (totalStudents == 0) {
-        std::cout << "No Students Found.\n";
-        return;
-    }
+    if (!checkStudents()) return;
 
     int rollNo;
     std::cout << "Enter Student Roll No. : ";
@@ -97,10 +99,7 @@ void searchStudent() {
 }
 
 void editStudent() {
-    if (totalStudents == 0) {
-        std::cout << "No Students Found.\n";
-        return;
-    }
+    if (!checkStudents()) return;
 
     int rollNo;
     std::cout << "Enter Student Roll No. : ";
@@ -140,10 +139,7 @@ void editStudent() {
 }
 
 void deleteStudent() {
-    if (totalStudents == 0) {
-        std::cout << "No Students Found.\n";
-        return;
-    }
+    if (!checkStudents()) return;
     int rollNo;
     std::cout << "Enter Student Roll No. : ";
     std::cin >> rollNo;
@@ -178,8 +174,41 @@ void deleteStudent() {
     }
 }
 void showMenuStudent() {
-    // std::cout << "1. Add Student\n2. View All Students\n3. Search Student\n4. Edit Student\n5. Delete Student\n6. Calculate Average Marks\n7. Show Topper\n8. Sort Students\n0. Back\n";
-    std::cout << "1. Add Student\n2. View All Students\n3. Search Student\n4. Edit Student\n5. Delete Student\n";
+    std::cout << "1. Add Student\n2. View All Students\n3. Search Student\n4. Edit Student\n5. Delete Student\n6. Calculate Average Marks\n7. Show Topper\n0. Back\n";
+}
+
+void calculateAvgMarks() {
+
+    if (!checkStudents()) return;
+
+    float total = 0;
+
+    for (int i = 0; i<totalStudents; i++) {
+        total += studentMarks[i];
+    }
+
+    float avg = total / totalStudents;
+
+    std::cout << "Average Marks : " << avg << std::endl;
+}
+
+void showTopper() {
+    if (!checkStudents()) return;
+
+    int index = 0;
+    float topper = studentMarks[index];
+
+    for (int i = 0; i<totalStudents; i++) {
+        if (studentMarks[i] > topper) {
+            topper = studentMarks[i];
+            index = i;
+        }
+    }
+
+    std::cout << "Topper Name : " << studentNames[index] << std::endl;
+    std::cout << "Topper Marks : " << topper << std::endl;
+    std::cout << "Topper Roll No : " << studentRollNo[index] << std::endl;
+
 }
 
 void studentManagement() {
@@ -211,6 +240,12 @@ void studentManagement() {
             break;
         case 5:
             deleteStudent();
+            break;
+        case 6:
+            calculateAvgMarks();
+            break;
+        case 7:
+            showTopper();
             break;
         default:
             std::cout << "Invalid Option." << std::endl;
