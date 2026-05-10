@@ -4,9 +4,13 @@
 constexpr int MAX_STUDENTS = 5000;
 int nextRollNo = 1;
 
-std::string studentNames[MAX_STUDENTS];
-float studentMarks[MAX_STUDENTS];
-int studentRollNo[MAX_STUDENTS];
+struct Student {
+    int rollNo;
+    std::string name;
+    float marks;
+};
+
+Student students[MAX_STUDENTS];
 int totalStudents = 0;
 
 bool checkStudents() {
@@ -38,13 +42,13 @@ void addStudent() {
             return;
         }
 
-        studentNames[totalStudents] = name;
-        studentMarks[totalStudents] = marks;
-        studentRollNo[totalStudents] = nextRollNo;
+        students[totalStudents].name = name;
+        students[totalStudents].rollNo = nextRollNo;
+        students[totalStudents].marks = marks;
         nextRollNo++;
 
         std::cout << "Roll No. of Student : "
-                  << studentRollNo[totalStudents]
+                  << students[totalStudents].rollNo
                   << std::endl;
 
         totalStudents++;
@@ -59,9 +63,9 @@ void viewStudents() {
     if (!checkStudents()) return;
 
     for (int i = 0; i<totalStudents; i++) {
-        std::cout << "Student Name: " << studentNames[i] << std::endl;
-        std::cout << "Student Marks: " << studentMarks[i] << std::endl;
-        std::cout << "Student Roll No: " << studentRollNo[i] << std::endl;
+        std::cout << "Student Name: " << students[i].name << std::endl;
+        std::cout << "Student Marks: " << students[i].marks << std::endl;
+        std::cout << "Student Roll No: " << students[i].rollNo << std::endl;
         std::cout << "=================================" << std::endl;
         std::cout << "" << std::endl;
     }
@@ -81,10 +85,10 @@ void searchStudent() {
     bool found = false;
 
     for (int i = 0; i<totalStudents; i++) {
-        if (studentRollNo[i] == rollNo) {
-            std::cout << "Student Name: " << studentNames[i] << std::endl;
-            std::cout << "Student Marks: " << studentMarks[i] << std::endl;
-            std::cout << "Student Roll No : " << studentRollNo[i] << std::endl;
+        if (students[i].rollNo == rollNo) {
+            std::cout << "Student Name: " << students[i].name << std::endl;
+            std::cout << "Student Marks: " << students[i].marks << std::endl;
+            std::cout << "Student Roll No : " << students[i].rollNo << std::endl;
             found = true;
             break;
         }
@@ -110,7 +114,7 @@ void editStudent() {
     std::string newName;
 
     for (int i = 0; i<totalStudents; i++) {
-        if (studentRollNo[i] == rollNo) {
+        if (students[i].rollNo == rollNo) {
             std::cout << "Enter New Student Name: ";
             std::cin.ignore(1000, '\n');
             getline(std::cin, newName);
@@ -121,8 +125,8 @@ void editStudent() {
                 return;
             }
 
-            studentNames[i] = newName;
-            studentMarks[i] = newMarks;
+            students[i].name = newName;
+            students[i].marks = newMarks;
 
             std::cout << "Student Successfully Updated!";
 
@@ -146,15 +150,13 @@ void deleteStudent() {
     char choice;
     bool found = false;
     for (int i = 0; i<totalStudents; i++) {
-        if (studentRollNo[i] == rollNo) {
+        if (students[i].rollNo == rollNo) {
             found = true;
             std::cout << "Confirm To Delete Student (Y/n) : ";
             std::cin >> choice;
             if(choice == 'y' || choice == 'Y'){
                 for (int j = i; j < totalStudents - 1; j++) {
-                    studentNames[j] = studentNames[j + 1];
-                    studentMarks[j] = studentMarks[j + 1];
-                    studentRollNo[j] = studentRollNo[j + 1];
+                    students[j] = students[j + 1];
                 }
 
                 totalStudents--;
@@ -184,7 +186,7 @@ void calculateAvgMarks() {
     float total = 0;
 
     for (int i = 0; i<totalStudents; i++) {
-        total += studentMarks[i];
+        total += students[i].marks;
     }
 
     float avg = total / totalStudents;
@@ -196,18 +198,18 @@ void showTopper() {
     if (!checkStudents()) return;
 
     int index = 0;
-    float topper = studentMarks[index];
+    float topper = students[index].marks;
 
     for (int i = 0; i<totalStudents; i++) {
-        if (studentMarks[i] > topper) {
-            topper = studentMarks[i];
+        if (students[i].marks > topper) {
+            topper = students[i].marks;
             index = i;
         }
     }
 
-    std::cout << "Topper Name : " << studentNames[index] << std::endl;
+    std::cout << "Topper Name : " << students[index].name << std::endl;
     std::cout << "Topper Marks : " << topper << std::endl;
-    std::cout << "Topper Roll No : " << studentRollNo[index] << std::endl;
+    std::cout << "Topper Roll No : " << students[index].rollNo << std::endl;
 
 }
 
@@ -215,7 +217,11 @@ void studentManagement() {
     int studentOption;
 
     do {
-        std::cout << "===== STUDENT MANAGEMENT =====\n";
+        std::cout << "\n";
+        std::cout << "====================================================\n";
+        std::cout << "            ORION STUDENT MANAGEMENT\n";
+        std::cout << "====================================================\n";
+        std::cout << "\n";
 
         showMenuStudent();
 

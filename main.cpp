@@ -11,11 +11,11 @@ int main() {
         std::cout << "=========================\n";
 
         std::cout << "1. Student Management\n";
-        std::cout << "2. Banking System\n";
-        std::cout << "3. Calculator\n";
-        std::cout << "4. Games\n";
-        std::cout << "5. Utilities\n";
-        std::cout << "6. Admin Panel\n";
+        std::cout << "2. Banking System (COMING SOON!)\n";
+        std::cout << "3. Calculator (COMING SOON!)\n";
+        std::cout << "4. Games (COMING SOON!)\n";
+        std::cout << "5. Utilities (COMING SOON!)\n";
+        std::cout << "6. Admin Panel (COMING SOON!)\n";
         std::cout << "0. Exit\n";
 
         std::cout << "\nEnter Choice: ";
@@ -27,10 +27,10 @@ int main() {
                 studentManagement();
                 break;
 
-            // case 2:
-            //     bankManagement();
-            //     break;
-            //
+            case 2:
+                bankManagement();
+                break;
+
             // case 3:
             //     calculator();
             //     break;
