@@ -9,4 +9,5 @@ add_executable(untitled main.cpp
         games.cpp
         utilities.cpp
         admin.cpp
-        functions.h)
+        functions.h
+        calculator.cpp)

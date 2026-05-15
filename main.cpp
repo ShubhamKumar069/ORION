@@ -11,7 +11,7 @@ int main() {
         std::cout << "=========================\n";
 
         std::cout << "1. Student Management\n";
-        std::cout << "2. Banking System (COMING SOON!)\n";
+        std::cout << "2. Banking System\n";
         std::cout << "3. Calculator (COMING SOON!)\n";
         std::cout << "4. Games (COMING SOON!)\n";
         std::cout << "5. Utilities (COMING SOON!)\n";
@@ -31,10 +31,10 @@ int main() {
                 bankManagement();
                 break;
 
-            // case 3:
-            //     calculator();
-            //     break;
-            //
+            case 3:
+                calculator();
+                break;
+
             // case 4:
             //     gameManagement();
             //     break;
