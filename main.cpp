@@ -1,10 +1,12 @@
 #include <iostream>
 #include "functions.h"
 
-int main() {
+int main()
+{
     int option;
 
-    do {
+    do
+    {
 
         std::cout << "=========================\n";
         std::cout << "          ORION\n";
@@ -21,19 +23,20 @@ int main() {
         std::cout << "\nEnter Choice: ";
         std::cin >> option;
 
-        switch(option) {
+        switch (option)
+        {
 
-            case 1:
-                studentManagement();
-                break;
+        case 1:
+            studentManagement();
+            break;
 
-            case 2:
-                bankManagement();
-                break;
+        case 2:
+            bankManagement();
+            break;
 
-            case 3:
-                calculator();
-                break;
+        case 3:
+            calculator();
+            break;
 
             // case 4:
             //     gameManagement();
@@ -47,15 +50,15 @@ int main() {
             //     adminPanel();
             //     break;
 
-            case 0:
-                std::cout << "Shutting Down...\n";
-                break;
+        case 0:
+            std::cout << "Shutting Down...\n";
+            break;
 
-            default:
-                std::cout << "Invalid choice!\n";
+        default:
+            std::cout << "Invalid choice!\n";
         }
 
-    } while(option != 0);
+    } while (option != 0);
 
     return 0;
 }

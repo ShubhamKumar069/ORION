@@ -8,7 +8,8 @@ int accNumber = 1000;
 int totalAccounts = 0;
 constexpr int MAX_ACCOUNTS = 100;
 
-struct Account {
+struct Account
+{
     std::string name;
     int age;
     std::string accType;
@@ -19,8 +20,10 @@ struct Account {
 
 Account accounts[MAX_ACCOUNTS];
 
-bool checkFull() {
-    if (totalAccounts >= MAX_ACCOUNTS) {
+bool checkFull()
+{
+    if (totalAccounts >= MAX_ACCOUNTS)
+    {
         std::cout << "Bank storage full!" << std::endl;
         return true;
     }
@@ -28,17 +31,21 @@ bool checkFull() {
     return false;
 }
 
-bool checkZero() {
-    if (totalAccounts == 0) {
+bool checkZero()
+{
+    if (totalAccounts == 0)
+    {
         std::cout << "NO USER FOUND!" << std::endl;
         return true;
     }
     return false;
 }
 
-void createAcc() {
+void createAcc()
+{
 
-    if (checkFull()) {
+    if (checkFull())
+    {
         return;
     }
 
@@ -73,27 +80,30 @@ void createAcc() {
 
     std::cout << "Account Created Successfully!" << std::endl;
     std::cout << "Account Number : "
-          << accounts[totalAccounts].accNumber
-          << std::endl;
+              << accounts[totalAccounts].accNumber
+              << std::endl;
     std::cout << "Initial Deposit : $" << initialDepo << std::endl;
 
     totalAccounts++;
-
-
 }
 
-void withdraw(int acc) {
+void withdraw(int acc)
+{
     double amount;
     std::cout << "How Much Do You Wanna Withdraw : $";
     std::cin >> amount;
-    if (amount<=0) {
+    if (amount <= 0)
+    {
         std::cout << "Invalid Amount!" << std::endl;
         return;
     }
-    if (amount > accounts[acc].balance) {
+    if (amount > accounts[acc].balance)
+    {
         std::cout << "Not Enough Money Available!" << std::endl;
         std::cout << "Balance : " << accounts[acc].balance << std::endl;
-    }else {
+    }
+    else
+    {
         double leftAmount = accounts[acc].balance - amount;
         std::cout << "$" << amount << " Withdrawn From Your Account" << std::endl;
         accounts[acc].balance = leftAmount;
@@ -101,12 +111,14 @@ void withdraw(int acc) {
     }
 }
 
-void deposit(int acc) {
+void deposit(int acc)
+{
     double amount;
     std::cout << "How Much Do You Wanna Deposit : $";
     std::cin >> amount;
 
-    if (amount<=0) {
+    if (amount <= 0)
+    {
         std::cout << "Invalid Amount!" << std::endl;
         return;
     }
@@ -116,57 +128,67 @@ void deposit(int acc) {
     std::cout << "New Balance : " << accounts[acc].balance << std::endl;
 }
 
-void checkBalance(int acc) {
+void checkBalance(int acc)
+{
     std::cout << "Balance : " << accounts[acc].balance << std::endl;
 }
 
-void loggedInHome() {
+void loggedInHome()
+{
 
     int choice;
 
-    do {
+    do
+    {
         std::cout << "================================================" << std::endl;
         std::cout << "                 ORION BANK" << std::endl;
         std::cout << "================================================" << std::endl;
 
-        std::cout << "1. Withdraw" <<std::endl;
-        std::cout << "2. Deposit" <<std::endl;
-        std::cout << "3. Check Balance" <<std::endl;
-        std::cout << "4. Logout" <<std::endl;
+        std::cout << "1. Withdraw" << std::endl;
+        std::cout << "2. Deposit" << std::endl;
+        std::cout << "3. Check Balance" << std::endl;
+        std::cout << "4. Logout" << std::endl;
         std::cout << "Enter Choice:";
         std::cin >> choice;
 
         double currentBalance = accounts[loggedInIndex].balance;
 
-        switch (choice) {
-            case 1: {
-                withdraw(loggedInIndex);
-                break;
-            }
-            case 2: {
-                deposit(loggedInIndex);
-                break;
-            }
-            case 3: {
-                checkBalance(loggedInIndex);
-                break;
-            }
-            case 4: {
-                std::cout << "Logged Out Successfully!" << std::endl;
-                break;
-            }
-            default: {
-                std::cout << "Invalid Option!";
-                break;
-            }
+        switch (choice)
+        {
+        case 1:
+        {
+            withdraw(loggedInIndex);
+            break;
+        }
+        case 2:
+        {
+            deposit(loggedInIndex);
+            break;
+        }
+        case 3:
+        {
+            checkBalance(loggedInIndex);
+            break;
+        }
+        case 4:
+        {
+            std::cout << "Logged Out Successfully!" << std::endl;
+            break;
+        }
+        default:
+        {
+            std::cout << "Invalid Option!";
+            break;
+        }
         }
 
-    }while(choice != 4);
-
+    } while (choice != 4);
 }
 
-void loginToAcc() {
-    if (checkZero()) {
+void loginToAcc()
+{
+    if (checkZero())
+    {
         return;
     }
     int accNo;
@@ -179,29 +201,34 @@ void loginToAcc() {
 
     bool found = false;
 
-    for (int i = 0; i < totalAccounts; i++) {
-        if (accounts[i].accNumber == accNo && accounts[i].pin == pin) {
+    for (int i = 0; i < totalAccounts; i++)
+    {
+        if (accounts[i].accNumber == accNo && accounts[i].pin == pin)
+        {
             found = true;
             loggedInIndex = i;
             std::cout << "Login Successful!" << std::endl;
-            std::cout << "Welcome, " << accounts[i].name <<std::endl;
+            std::cout << "Welcome, " << accounts[i].name << std::endl;
             loggedInHome();
         }
     }
 
-    if (!found) {
+    if (!found)
+    {
         std::cout << "Invalid Account Number or PIN!"
                   << std::endl;
     }
 }
 
-
-void thanks() {
+void thanks()
+{
     std::cout << "THANKS FOR USING ORION BANK!" << std::endl;
 }
 
-void searchAccount() {
-    if (checkZero()) {
+void searchAccount()
+{
+    if (checkZero())
+    {
         return;
     }
 
@@ -210,15 +237,17 @@ void searchAccount() {
     int pin;
     int accNo;
 
-    std::cout<< "Enter Your PIN : ";
+    std::cout << "Enter Your PIN : ";
     std::cin >> pin;
     std::cout << "Enter Account Number : ";
     std::cin >> accNo;
 
     bool found = false;
 
-    for (int i = 0; i<totalAccounts; i++) {
-        if (accounts[i].accNumber == accNo && accounts[i].pin == pin) {
+    for (int i = 0; i < totalAccounts; i++)
+    {
+        if (accounts[i].accNumber == accNo && accounts[i].pin == pin)
+        {
 
             found = true;
 
@@ -229,14 +258,17 @@ void searchAccount() {
         }
     }
 
-    if (!found) {
+    if (!found)
+    {
         std::cout << "Invalid Account Number OR Account PIN!" << std::endl;
         return;
     }
 }
 
-void deleteAccount() {
-    if (checkZero()) {
+void deleteAccount()
+{
+    if (checkZero())
+    {
         return;
     }
 
@@ -244,81 +276,90 @@ void deleteAccount() {
     int accNo;
     char choice;
 
-    std::cout<< "Enter Your PIN : ";
+    std::cout << "Enter Your PIN : ";
     std::cin >> pin;
     std::cout << "Enter Account Number : ";
     std::cin >> accNo;
 
     bool found = false;
 
-    for (int i = 0; i<totalAccounts; i++) {
-        if (accounts[i].accNumber == accNo && accounts[i].pin == pin) {
+    for (int i = 0; i < totalAccounts; i++)
+    {
+        if (accounts[i].accNumber == accNo && accounts[i].pin == pin)
+        {
             found = true;
             std::cout << "Confirm To Delete Account (Y/n) : ";
             std::cin >> choice;
-            if (choice == 'y' || choice == 'Y') {
-                for (int j = i; j < totalAccounts - 1; j++) {
+            if (choice == 'y' || choice == 'Y')
+            {
+                for (int j = i; j < totalAccounts - 1; j++)
+                {
                     accounts[j] = accounts[j + 1];
                 }
 
                 totalAccounts--;
                 std::cout << "Student Deleted Successfully!\n";
                 break;
-            } else if (choice == 'n' || choice == 'N') {
+            }
+            else if (choice == 'n' || choice == 'N')
+            {
                 std::cout << "Deleting Account Rejected!\n";
                 return;
-            } else {
+            }
+            else
+            {
                 std::cout << "Enter Valid Choices!!";
                 return;
             }
         }
     }
 
-    if (!found) {
+    if (!found)
+    {
         std::cout << "Invalid Account Number OR Account PIN!" << std::endl;
         return;
     }
-
 }
 
-void bankManagement() {
+void bankManagement()
+{
 
-    do {
+    do
+    {
         std::cout << "================================================" << std::endl;
         std::cout << "                 ORION BANK" << std::endl;
         std::cout << "================================================" << std::endl;
 
-        std::cout << "1. Create Account" <<std::endl;
-        std::cout << "2. Login To Account" <<std::endl;
-        std::cout << "3. Search Account" <<std::endl;
-        std::cout << "4. Delete Account" <<std::endl;
-        std::cout << "0. Back" <<std::endl;
+        std::cout << "1. Create Account" << std::endl;
+        std::cout << "2. Login To Account" << std::endl;
+        std::cout << "3. Search Account" << std::endl;
+        std::cout << "4. Delete Account" << std::endl;
+        std::cout << "0. Back" << std::endl;
         std::cout << "\n";
         std::cout << "Enter Choice:";
         std::cin >> option;
 
-        switch (option) {
-            case 0:
-                thanks();
-                break;
-            case 1:
-                createAcc();
-                break;
-            case 2:
-                loginToAcc();
-                break;
-            case 3:
-                searchAccount();
-                break;
-            case 4:
-                deleteAccount();
-                break;
-            default:
-                std::cout << "Invalid Choice!" << std::endl;
-                break;
-
+        switch (option)
+        {
+        case 0:
+            thanks();
+            break;
+        case 1:
+            createAcc();
+            break;
+        case 2:
+            loginToAcc();
+            break;
+        case 3:
+            searchAccount();
+            break;
+        case 4:
+            deleteAccount();
+            break;
+        default:
+            std::cout << "Invalid Choice!" << std::endl;
+            break;
         }
 
-    }while(option != 0);
-
+    } while (option != 0);
 }
